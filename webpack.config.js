@@ -60,7 +60,7 @@ module.exports = {
 		publicPath: '/',
 	},
 	resolve: {
-		extensions: ['.js', '.json', '.scss',],
+		extensions: ['.js', '.json', '.scss'],
 		alias: {
 			'@': path.resolve(__dirname, 'src'),
 		},
@@ -117,7 +117,7 @@ module.exports = {
 				test: /\.(ttf|woff|otf|eot|woff2)$/i,
 				type: 'asset/resource',
 				generator: {
-					filename: 'assets/fonts/[name].[ext]',
+					filename: 'fonts/[name].[ext]',
 				},
 			},
 			{
