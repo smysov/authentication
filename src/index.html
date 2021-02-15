@@ -1,12 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login</title>
 </head>
+
 <body>
-  
+  <main>
+    <section class="section hero">
+      <div class="authentication">
+        <form class="form" name="sign-in">
+          <h2 class="form__title">Please Login</h2>
+          <div class="form__row form__control">
+            <label for="email" class="form__caption">Email address:</label>
+            <input class="form__input" type="email" id="email" placeholder="Enter email"
+              data-invalid-message="Please provide valid email example@example.com">
+          </div>
+          <div class="form__row form__control">
+            <label for="password" class="form__caption">Password:</label>
+            <input class="form__input" type="password" name="password" id="password" placeholder="Enter password" data-required="password">
+          </div>
+          <div class="form__row">
+            <button class="button form__button" type="submit">Send</button>
+          </div>
+        </form>
+      </div>
+      <div class="info">
+        <h2 class="info__title">Welcome to my application!</h2>
+        <p class="info__description">Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          Eius, officiis assumenda.
+          Quas sit laudantium qui excepturi perspiciatis pariatur temporibus tempore.
+        </p>
+      </div>
+
+    </section>
+  </main>
 </body>
+
 </html>
