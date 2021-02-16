@@ -68,6 +68,13 @@
     }
   }
 
+  &__error {
+    font-size: 10px;
+    color: crimson;
+    padding-left: 5px;
+    letter-spacing: 0.2px;
+  }
+
   &__button {
     border-radius: 4px;
     background-color: #029676;
