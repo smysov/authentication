@@ -26,6 +26,6 @@ export function removeInputError(element) {
 	const parent = element.parentElement;
 	const error = parent.querySelector('.form__error');
 	if (!error) return;
-	element.classList.remove('.form__error');
+	element.classList.remove('is-invalid');
 	parent.removeChild(error);
 }
