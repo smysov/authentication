@@ -8,11 +8,16 @@
   max-width: 500px;
 
   &__title {
-    text-align: center;
     font-weight: 300;
+    text-align: center;
+    text-transform: uppercase;
 
     @include tablets {
       font-size: 30px;
+    }
+
+    @include tablets {
+      font-size: 34px;
     }
   }
 
@@ -34,6 +39,10 @@
     @include tablets {
       font-size: 20px;
     }
+
+    @include desktop {
+      font-size: 22px;
+    }
   }
 
   &__input {
@@ -51,6 +60,15 @@
     @include tablets {
       font-size: 18px;
       padding: 10px;
+    }
+
+    @include desktop {
+      font-size: 20px;
+      padding: 15px;
+    }
+
+    @include desktop {
+      font-size: 20px;
     }
 
 
@@ -73,6 +91,15 @@
     color: crimson;
     padding-left: 5px;
     letter-spacing: 0.2px;
+
+    @include tablets {
+      font-size: 15px;
+    }
+
+    @include desktop {
+      font-size: 17px;
+    }
+
   }
 
   &__button {
