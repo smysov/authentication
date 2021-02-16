@@ -4,6 +4,7 @@ import UI from './config/ui.config';
 import { validate } from './helpers/validate';
 import { showInputError, removeInputError, checkClassError } from './views/form';
 import login from './services/auth.server';
+import { notify } from './views/notification';
 
 //Elements
 const { form, inputEmail, inputPassword } = UI;
@@ -16,6 +17,7 @@ form.addEventListener('submit', e => {
 });
 
 inputs.forEach(input => input.addEventListener('focus', () => removeInputError(input)));
+setTimeout(() => notify({ msg: 'Welcome to my app!' }), 3000);
 
 async function onSubmit() {
 	const isValidateForm = inputs.every(input => {
@@ -32,7 +34,8 @@ async function onSubmit() {
 	try {
 		await login(inputEmail.value, inputPassword.value);
 		form.reset();
-	} catch (error) {
-		console.log(error);
+		notify({ msg: 'Login success', className: 'alert_success' });
+	} catch (err) {
+		notify({ msg: 'Login faild', className: 'alert_warning' });
 	}
 }
