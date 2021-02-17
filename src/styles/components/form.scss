@@ -4,13 +4,67 @@
   row-gap: 20px;
   padding: 10px;
   margin: 0 auto;
-  flex: 1;
   max-width: 500px;
+  margin-bottom: 10px;
+  width: 100%;
 
+  &_registration {
+    padding: 40px 10px;
+    row-gap: 5px;
+    margin-bottom: 0;
+    max-width: 100%;
+
+    @include tablets {
+      row-gap: 10px;
+    }
+
+    @include desktop {
+      padding: 40px 20px;
+    }
+  }
+
+  &__group {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+
+    @include tablets {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      column-gap: 5px;
+    }
+  }
+
+  &__row {
+    display: flex;
+    flex-direction: column;
+    row-gap: 3px;
+    width: 100%;
+
+    &_small {
+      @include tablets {
+        width: 33%;
+      }
+    }
+
+    @include tablets {
+      row-gap: 7px;
+    }
+  }
+
+}
+
+/* Title */
+.form {
   &__title {
     font-weight: 300;
     text-align: center;
     text-transform: uppercase;
+
+    &_registration {
+      margin-bottom: 10px;
+    }
 
     @include tablets {
       font-size: 30px;
@@ -20,30 +74,10 @@
       font-size: 34px;
     }
   }
+}
 
-  &__row {
-    display: flex;
-    flex-direction: column;
-    row-gap: 3px;
-
-    @include tablets {
-      row-gap: 7px;
-    }
-  }
-
-  &__caption {
-    font-weight: 500;
-    letter-spacing: 1.2px;
-    padding-left: 10px;
-
-    @include tablets {
-      font-size: 20px;
-    }
-
-    @include desktop {
-      font-size: 22px;
-    }
-  }
+/* Input */
+.form {
 
   &__input {
     font-size: 15px;
@@ -52,6 +86,11 @@
     border: 2px solid #e0e0e0;
     border-radius: 5px;
     transition: .5s;
+
+    &_registration {
+      font-size: 14px;
+      padding: 5px;
+    }
 
     &:hover {
       border: 2px solid #5569c5;
@@ -79,13 +118,45 @@
       @include tablets {
         font-size: 16px;
       }
+
+      @include desktop {
+        font-size: 18px;
+      }
     }
 
     &.is-invalid {
       border: 2px solid crimson;
     }
   }
+}
 
+/* Caption */
+.form {
+  &__caption {
+    font-weight: 500;
+    letter-spacing: 1.2px;
+    padding-left: 10px;
+
+    @include tablets {
+      font-size: 20px;
+    }
+
+    @include desktop {
+      font-size: 22px;
+    }
+
+    &_registration {
+      font-size: 12px;
+
+      @include tablets {
+        font-size: 14px;
+      }
+    }
+  }
+}
+
+/* Errors */
+.form {
   &__error {
     font-size: 10px;
     color: crimson;
@@ -101,7 +172,10 @@
     }
 
   }
+}
 
+/* Buttons */
+.form {
   &__button {
     border-radius: 4px;
     background-color: #029676;
@@ -119,4 +193,69 @@
       border: 2px solid green;
     }
   }
+}
+
+/* Radio */
+.form {
+
+  &__caption_radio {
+    position: relative;
+    padding-left: 30px;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: -2px;
+      left: 0;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background-color: transparent;
+      border: 1px solid green;
+
+      @include desktop {
+        top: 5px;
+      }
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 3px;
+      left: 5px;
+      width: 10px;
+      height: 10px;
+      background-color: green;
+      border-radius: 50%;
+      transform: scale(0);
+      transition: .5s;
+
+      @include desktop {
+        top: 10px;
+      }
+    }
+  }
+
+  &__radio {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    border: 0;
+    padding: 0;
+    white-space: nowrap;
+    clip-path: inset(100%);
+    clip: rect(0 0 0 0);
+
+    &:checked+.form__caption_radio::after {
+      transform: scale(1);
+    }
+  }
+}
+
+
+.options {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
 }
