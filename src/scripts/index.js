@@ -3,13 +3,11 @@ import '../styles/main';
 import UI from './config/ui.config';
 import { validate } from './helpers/validate';
 import { showInputError, removeInputError } from './views/form';
-import login from './services/auth.server';
+import { login, signup } from './services/auth.server';
 import { notify } from './views/notification';
-import renderOverlayRegistration from './views/overlay';
-import closeOverlay from './helpers/closeOverlay';
 
 //Elements
-const { form, inputEmail, inputPassword, registration, registrationContainer } = UI;
+const { form, inputEmail, inputPassword, registration, overlay, closeOverlay } = UI;
 const inputs = [inputEmail, inputPassword];
 
 //Events
@@ -20,18 +18,18 @@ form.addEventListener('submit', e => {
 
 registration.addEventListener('click', e => {
 	e.preventDefault();
-	renderOverlayRegistration();
+
+	overlay.classList.add('overlay_show');
 });
 
-registrationContainer.addEventListener('click', e => {
-	if (e.target.tagName === 'A') {
-		closeOverlay();
-	}
+closeOverlay.addEventListener('click', e => {
+	e.preventDefault();
+	overlay.classList.remove('overlay_show');
 });
 
 inputs.forEach(input => input.addEventListener('focus', () => removeInputError(input)));
-
 //Functions
+
 async function onSubmit() {
 	const isValidateForm = inputs.every(input => {
 		const isValidateInput = validate(input);

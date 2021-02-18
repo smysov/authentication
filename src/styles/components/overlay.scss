@@ -8,18 +8,34 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.3);
+  transition: .5s;
+  opacity: 0;
+  visibility: hidden;
 
-  
+  &_show {
+    opacity: 1;
+    visibility: visible;
+
+    & .overlay__content {
+      position: relative;
+      width: 80%;
+      background-color: #fcfcfc;
+      transform: scale(1);
+
+      @include desktop {
+        width: 60%;
+      }
+    }
+
+  }
+
   &__content {
     position: relative;
     width: 80%;
     background-color: #fcfcfc;
-    animation: .5s size-in linear;
-
-    @include desktop {
-      width: 60%;
-    }
+    transform: scale(0);
+    transition: .5s;
   }
 
   &__close {
@@ -54,15 +70,5 @@
     &::after {
       transform: rotate(-45deg);
     }
-  }
-}
-
-@keyframes size-in {
-  from {
-    transform: scale(0);
-  }
-
-  to {
-    transform: scale(1);
   }
 }

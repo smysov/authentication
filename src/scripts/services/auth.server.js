@@ -15,4 +15,13 @@ export async function login(email, password) {
 		return Promise.reject(err);
 	}
 }
-export default login;
+
+// export async function signup(data) {
+// 	try {
+// 		const response = await axios.post('/auth/signup', JSON.stringify(data));
+// 		console.log(response);
+// 		return response;
+// 	} catch (err) {
+// 		return Promise.reject(err);
+// 	}
+// }
