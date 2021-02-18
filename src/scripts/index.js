@@ -5,9 +5,10 @@ import { validate } from './helpers/validate';
 import { showInputError, removeInputError, checkClassError } from './views/form';
 import login from './services/auth.server';
 import { notify } from './views/notification';
+import renderFormRegistration from './views/registration';
 
 //Elements
-const { form, inputEmail, inputPassword } = UI;
+const { form, inputEmail, inputPassword, registration, overlay, closeOverlay } = UI;
 const inputs = [inputEmail, inputPassword];
 
 //Events
@@ -16,8 +17,14 @@ form.addEventListener('submit', e => {
 	onSubmit();
 });
 
+registration.addEventListener('click', e => {
+	e.preventDefault();
+	setTimeout(() => renderFormRegistration(), 500);
+});
+
 inputs.forEach(input => input.addEventListener('focus', () => removeInputError(input)));
-setTimeout(() => notify({ msg: 'Welcome to my app!' }), 3000);
+
+setTimeout(() => notify({ msg: 'Welcome to my app!' }), 1000);
 
 async function onSubmit() {
 	const isValidateForm = inputs.every(input => {

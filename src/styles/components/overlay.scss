@@ -10,10 +10,12 @@
   align-items: center;
   background-color: rgba(0, 0, 0, 0.4);
 
+  
   &__content {
     position: relative;
     width: 80%;
     background-color: #fcfcfc;
+    animation: .5s size-in linear;
 
     @include desktop {
       width: 60%;
@@ -52,5 +54,15 @@
     &::after {
       transform: rotate(-45deg);
     }
+  }
+}
+
+@keyframes size-in {
+  from {
+    transform: scale(0);
+  }
+
+  to {
+    transform: scale(1);
   }
 }
