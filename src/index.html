@@ -17,7 +17,7 @@
           <h2 class="form__title">Please Login</h2>
           <div class="form__row form__control">
             <label for="email" class="form__caption">Email address:</label>
-            <input class="form__input" type="email" id="email" placeholder="Enter email" data-required="email"
+            <input class="form__input" type="email" id="email" name="email" placeholder="Enter email" data-required="email"
               data-invalid-message="Enter a valid email address test@list.ru">
           </div>
           <div class="form__row form__control">
@@ -50,7 +50,7 @@
           <div class="form__group">
             <div class="form__row form__control">
               <label for="email" class="form__caption form__caption_registration">Email address:</label>
-              <input class="form__input form__input_registration" type="email" id="new-email" placeholder="my-email@list.ru"
+              <input class="form__input form__input_registration" type="email" id="new-email" name="email" placeholder="my-email@list.ru"
                 data-required="email" data-invalid-message="Enter a valid email address test@list.ru">
             </div>
             <div class="form__row form__control">
@@ -66,25 +66,29 @@
           <div class="form__group">
             <div class="form__row form__control">
               <label for="name" class="form__caption form__caption_registration">Your name:</label>
-              <input class="form__input form__input_registration" type="text" name="name" id="name">
+              <input class="form__input form__input_registration" type="text" name="first_name" id="name">
             </div>
             <div class="form__row form__control">
               <label for="surname" class="form__caption form__caption_registration">Your surname:</label>
-              <input class="form__input form__input_registration" type="text" name="surname" id="surname">
+              <input class="form__input form__input_registration" type="text" name="last_name" id="surname">
             </div>
           </div>
           <div class="form__row form__control">
+            <label for="birthday" class="form__caption form__caption_registration">Birthday:</label>
+            <input class="form__input" type="date" name="birthday" id="birthday">
+          </div>
+          <div class="form__row form__control">
             <label for="phone" class="form__caption form__caption_registration">Phone:</label>
-            <input class="form__input form__input_registration" type="tel" name="phone" id="phone" data-required="password"
+            <input class="form__input form__input_registration" type="tel" name="phone" id="phone" data-required="phone"
               placeholder="89270001988">
           </div>
           <div class="form__row form__control options">
             <div class="form__column">
-              <input class="form__radio" type="radio" name="phone" id="male" value="male">
+              <input class="form__radio" type="radio" name="phone" id="male" name="gender_orientation" value="male" checked>
               <label for="male" class="form__caption form__caption_radio form__caption_registration">Male</label>
             </div>
             <div class="form__column">
-              <input class="form__radio" type="radio" name="phone" id="female" value="female">
+              <input class="form__radio" type="radio" name="phone" id="female" name="gender_orientation" value="female">
               <label for="female" class="form__caption form__caption_radio form__caption_registration">Female</label>
             </div>
           </div>
@@ -97,10 +101,6 @@
               <label for="country" class="form__caption form__caption_registration">Country:</label>
               <input class="form__input form__input_registration" type="text" name="country" id="country">
             </div>
-          </div>
-          <div class="form__row form__control">
-            <label for="birthday" class="form__caption form__caption_registration">Birthday:</label>
-            <input class="form__input form__input_registration" type="date" name="birthday" id="birthday">
           </div>
           <div class="form__row">
             <button class="button form__button form__button_registration" type="submit">Send</button>
