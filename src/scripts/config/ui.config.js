@@ -3,7 +3,7 @@ const UI = {
 	inputEmail: document.getElementById('email'),
 	inputPassword: document.getElementById('password'),
 	registration: document.querySelector('.registration__link'),
-	overlay: document.querySelector('.overlay'),
+	registrationContainer: document.querySelector('.wrapper-overlay'),
 };
 
-export default UI 
+export default UI;

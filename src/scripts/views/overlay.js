@@ -1,4 +1,6 @@
-function templateRegistration() {
+// import closeOverlay from '../helpers/closeOverlay';
+
+function templateOverlayRegistration() {
 	return `
     <div class="overlay">
       <div class="overlay__content">
@@ -35,11 +37,11 @@ function templateRegistration() {
           </div>
           <div class="form__row form__control options">
             <div class="form__column">
-              <input class="form__radio" type="radio" name="phone" id="male">
+              <input class="form__radio" type="radio" name="phone" id="male" value="male">
               <label for="male" class="form__caption form__caption_radio form__caption_registration">Male</label>
             </div>
             <div class="form__column">
-              <input class="form__radio" type="radio" name="phone" id="female">
+              <input class="form__radio" type="radio" name="phone" id="female" value="female">
               <label for="female" class="form__caption form__caption_radio form__caption_registration">Female</label>
             </div>
           </div>
@@ -53,19 +55,9 @@ function templateRegistration() {
               <input class="form__input form__input_registration" type="text" name="country" id="country">
             </div>
           </div>
-          <div class="form__group form__group_birthday">
-            <div class="form__row form__row_small form__control">
-              <label for="date" class="form__caption form__caption_registration">Date birth:</label>
-              <input class="form__input form__input_registration" type="text" name="date" id="date" placeholder="01">
-            </div>
-            <div class="form__row form__row_small form__control">
-              <label for="month" class="form__caption form__caption_registration">Month birth:</label>
-              <input class="form__input form__input_registration" type="text" name="month" id="month" placeholder="10">
-            </div>
-            <div class="form__row form__row_small form__control">
-              <label for="year" class="form__caption form__caption_registration">Year birth:</label>
-              <input class="form__input form__input_registration" type="text" name="year" id="year" placeholder="1988">
-            </div>
+          <div class="form__row form__control">
+            <label for="birthday" class="form__caption form__caption_registration">Birthday:</label>
+            <input class="form__input form__input_registration" type="date" name="birthday" id="birthday">
           </div>
           <div class="form__row">
             <button class="button form__button" type="submit">Send</button>
@@ -77,28 +69,12 @@ function templateRegistration() {
   `;
 }
 
-function renderFormRegistration() {
-	const template = templateRegistration();
-	const main = document.querySelector('main');
-	main.insertAdjacentHTML('beforeend', template);
+function renderOverlayRegistration() {
+	const template = templateOverlayRegistration();
+	const container = document.querySelector('.wrapper-overlay');
+	container.insertAdjacentHTML('beforeend', template);
 
-	closeOverlay();
+	// closeOverlay();
 }
 
-function closeOverlay() {
-	const buttonClose = document.querySelector('.overlay__close');
-	const overlay = document.querySelector('.overlay');
-	buttonClose.addEventListener('click', e => {
-		e.preventDefault();
-		animationCloseOverlay();
-		setTimeout(() => overlay.remove(), 500);
-	});
-}
-
-function animationCloseOverlay() {
-  const overlayContent = document.querySelector('.overlay__content');
-	overlayContent.animate([{ transform: 'scale(1)' }, { transform: 'scale(0)' }], {
-		duration: 500,
-	});
-}
-export default renderFormRegistration;
+export default renderOverlayRegistration;

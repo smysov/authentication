@@ -2,13 +2,14 @@ import '../styles/main';
 
 import UI from './config/ui.config';
 import { validate } from './helpers/validate';
-import { showInputError, removeInputError, checkClassError } from './views/form';
+import { showInputError, removeInputError } from './views/form';
 import login from './services/auth.server';
 import { notify } from './views/notification';
-import renderFormRegistration from './views/registration';
+import renderOverlayRegistration from './views/overlay';
+import closeOverlay from './helpers/closeOverlay';
 
 //Elements
-const { form, inputEmail, inputPassword, registration, overlay, closeOverlay } = UI;
+const { form, inputEmail, inputPassword, registration, registrationContainer } = UI;
 const inputs = [inputEmail, inputPassword];
 
 //Events
@@ -19,13 +20,18 @@ form.addEventListener('submit', e => {
 
 registration.addEventListener('click', e => {
 	e.preventDefault();
-	setTimeout(() => renderFormRegistration(), 500);
+	renderOverlayRegistration();
+});
+
+registrationContainer.addEventListener('click', e => {
+	if (e.target.tagName === 'A') {
+		closeOverlay();
+	}
 });
 
 inputs.forEach(input => input.addEventListener('focus', () => removeInputError(input)));
 
-setTimeout(() => notify({ msg: 'Welcome to my app!' }), 1000);
-
+//Functions
 async function onSubmit() {
 	const isValidateForm = inputs.every(input => {
 		const isValidateInput = validate(input);
@@ -46,3 +52,5 @@ async function onSubmit() {
 		notify({ msg: 'Login faild', className: 'alert_warning' });
 	}
 }
+
+setTimeout(() => notify({ msg: 'Welcome to my app!' }), 1000);
