@@ -2,12 +2,9 @@ import '../styles/main';
 
 import UI from './config/ui.config';
 import { validate } from './helpers/validate';
-import { showInputError, removeInputError } from './views/form';
+import { showInputError } from './views/form';
 import { login, signup } from './services/auth.server';
 import { notify } from './views/notification';
-import writDataBirthday from './helpers/birthdayValue';
-import writeDataRadioButton from './helpers/radioValue';
-import writeDataInput from './helpers/inputValue';
 import removeValidationError from './helpers/focusInput';
 
 //Elements
@@ -19,19 +16,42 @@ const {
 	overlay,
 	closeOverlay,
 	newUser,
+	birthday,
 } = UI;
 
-const inputs = [inputEmail, inputPassword];
+const inputsLogin = [inputEmail, inputPassword];
+const [...inputsSignup] = document.querySelectorAll('.form__input_registration');
 
 //Events
 form.addEventListener('submit', e => {
+	const formData = new FormData(form);
+	const json = JSON.stringify(Object.fromEntries(formData));
 	e.preventDefault();
-	onSubmit();
+	onSubmit(form, inputsLogin, login, json, 'Login success', 'Login faild');
 });
 
 newUser.addEventListener('submit', e => {
+	const [
+		date_of_birth_year,
+		date_of_birth_month,
+		date_of_birth_day,
+	] = birthday.value.split('-');
+
+	const formData = new FormData(newUser);
+	formData.delete('birthday');
+	formData.append('date_of_birth_year', date_of_birth_year);
+	formData.append('date_of_birth_month', date_of_birth_month);
+	formData.append('date_of_birth_day', date_of_birth_day);
+	const json = JSON.stringify(Object.fromEntries(formData));
 	e.preventDefault();
-	onFormSingup();
+	onSubmit(
+		newUser,
+		inputsSignup,
+		signup,
+		json,
+		'Account created!',
+		'Oppps! You have problems!',
+	);
 });
 
 openOverlay.addEventListener('click', e => {
@@ -45,57 +65,26 @@ closeOverlay.addEventListener('click', e => {
 	overlay.classList.remove('overlay_show');
 });
 
-removeValidationError(inputs);
-
 //Functions
-async function onSubmit() {
-	const isValidateForm = inputs.every(input => {
-		const isValidateInput = validate(input);
-		if (!isValidateInput) {
-			if (input.classList.contains('is-invalid')) return;
-			showInputError(input);
-		}
-		return isValidateInput;
-	});
-
-	if (!isValidateForm) return;
-
-	try {
-		await login(inputEmail.value, inputPassword.value);
-		form.reset();
-		notify({ msg: 'Login success', className: 'alert_success' });
-	} catch (err) {
-		notify({ msg: 'Login faild', className: 'alert_warning' });
-	}
-}
-
-async function onFormSingup() {
-	const userData = {};
-	const [...inputs] = document.querySelectorAll('.form__input_registration');
+async function onSubmit(form, inputs, sendForm, data, messageSuccess, messageFailed) {
 	removeValidationError(inputs);
-
 	const isValidateForm = inputs.every(input => {
 		const isValidateInput = validate(input);
 		if (!isValidateInput) {
 			if (input.classList.contains('is-invalid')) return;
 			showInputError(input);
 		}
-
-		writeDataInput(input, userData);
-		writDataBirthday(userData);
-		writeDataRadioButton(userData);
-
 		return isValidateInput;
 	});
 
 	if (!isValidateForm) return;
 
 	try {
-		await signup(userData);
-		newUser.reset();
-		notify({ msg: 'Account created!', className: 'alert_success' });
+		await sendForm(data);
+		form.reset();
+		notify({ msg: `${messageSuccess}`, className: 'alert_success' });
 	} catch (err) {
-		notify({ msg: 'Oppps! You have problems!', className: 'alert_warning' });
+		notify({ msg: `${messageFailed}`, className: 'alert_warning' });
 	}
 }
 
